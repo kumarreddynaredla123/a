@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install java8
+    apt: 
+      name: openjdk-8-jdk
+      state: present
+      update_cache: yes
+  - name: install spring-petclinc.jar
+    get_url: 
+      url: https://qt-s3-new-testing.s3-us-west-2.amazonaws.com/spring-petclinic.jar
+      dest: /home/ansible
+  - name: execute this command
+    shell: java -jar /home/ansible/spring-petclinic.jar
+    
